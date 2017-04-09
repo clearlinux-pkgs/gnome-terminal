@@ -1,0 +1,3 @@
+--disable-gterminal
+--disable-migration
+--without-nautilus-extension
