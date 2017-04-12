@@ -1,3 +1,66 @@
+commit f5fc62021572237f2578638cf133bec8cd04c2b8
+Author: Christian Persch <chpe@src.gnome.org>
+Date:   Mon Apr 10 21:29:46 2017 +0200
+
+    Version 3.24.1
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1962030be4b7d97dbef527da30526d17e13e1976
+Author: gogo <trebelnik2@gmail.com>
+Date:   Sat Apr 8 19:54:44 2017 +0000
+
+    Update Croatian translation
+
+ po/hr.po | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 27ed9ef764e3a8eb611e8fecc447bc06c813396c
+Author: gogo <trebelnik2@gmail.com>
+Date:   Sat Apr 8 17:43:19 2017 +0000
+
+    Update Croatian translation
+
+ po/hr.po | 630 ++++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 319 insertions(+), 311 deletions(-)
+
+commit ab74b12586ce11ebab548eaa100089e668a82f01
+Author: Tom Tryfonidis <tomtryf@gnome.org>
+Date:   Fri Apr 7 10:34:19 2017 +0000
+
+    Update Greek translation
+
+ po/el.po | 417 ++++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 212 insertions(+), 205 deletions(-)
+
+commit 8f3137e45b6ba08a33559c5a2038d867bae3c31d
+Author: Piotr Drąg <piotrdrag@gmail.com>
+Date:   Sat Mar 25 17:18:07 2017 +0100
+
+    Update Polish translation
+
+ po/pl.po | 56 +++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 29 insertions(+), 27 deletions(-)
+
+commit 242780936438e7bb3f5d2a9f556fc00d1870cfb8
+Author: Baurzhan Muftakhidinov <baurthefirst@gmail.com>
+Date:   Tue Mar 21 05:32:41 2017 +0000
+
+    Update Kazakh translation
+
+ po/kk.po | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 7d53d0df049e73197634fc1e7ce14c80e133d46c
+Author: Christian Persch <chpe@src.gnome.org>
+Date:   Mon Mar 20 22:09:22 2017 +0100
+
+    Post release version bump
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 commit 623375c2f8d17dc56e9c241e4db257131f96d9da
 Author: Christian Persch <chpe@src.gnome.org>
 Date:   Mon Mar 20 22:06:48 2017 +0100
