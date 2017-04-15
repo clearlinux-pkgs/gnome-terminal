@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.24.1
-Release  : 4
+Release  : 5
 URL      : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Summary  : No detailed summary available
@@ -12,6 +12,7 @@ Group    : Development/Tools
 License  : GPL-3.0
 Requires: gnome-terminal-bin
 Requires: gnome-terminal-config
+Requires: gnome-terminal-lib
 Requires: gnome-terminal-data
 Requires: gnome-terminal-locales
 BuildRequires : dconf-dev
@@ -58,6 +59,16 @@ Group: Data
 data components for the gnome-terminal package.
 
 
+%package lib
+Summary: lib components for the gnome-terminal package.
+Group: Libraries
+Requires: gnome-terminal-data
+Requires: gnome-terminal-config
+
+%description lib
+lib components for the gnome-terminal package.
+
+
 %package locales
 Summary: locales components for the gnome-terminal package.
 Group: Default
@@ -71,7 +82,7 @@ locales components for the gnome-terminal package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1492279832
+export SOURCE_DATE_EPOCH=1492279999
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -80,8 +91,7 @@ export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-se
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
 %configure --disable-static --disable-gterminal \
---disable-migration \
---without-nautilus-extension
+--disable-migration
 make V=1  %{?_smp_mflags}
 
 %check
@@ -92,7 +102,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492279832
+export SOURCE_DATE_EPOCH=1492279999
 rm -rf %{buildroot}
 %make_install
 %find_lang gnome-terminal
@@ -565,7 +575,12 @@ rm -rf %{buildroot}
 /usr/share/help/sv/gnome-terminal/txt-links.page
 /usr/share/help/sv/gnome-terminal/txt-search.page
 /usr/share/help/sv/gnome-terminal/txt-select-text.page
+/usr/share/metainfo/org.gnome.Terminal.Nautilus.metainfo.xml
 /usr/share/metainfo/org.gnome.Terminal.appdata.xml
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/nautilus/extensions-3.0/libterminal-nautilus.so
 
 %files locales -f gnome-terminal.lang
 %defattr(-,root,root,-)
