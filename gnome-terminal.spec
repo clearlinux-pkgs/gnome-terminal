@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.24.1
-Release  : 3
+Release  : 4
 URL      : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Summary  : No detailed summary available
@@ -25,6 +25,7 @@ BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(gio-2.0)
 BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(gsettings-desktop-schemas)
+BuildRequires : pkgconfig(libnautilus-extension)
 BuildRequires : pkgconfig(uuid)
 BuildRequires : vte-dev
 
@@ -70,11 +71,14 @@ locales components for the gnome-terminal package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1492030700
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export SOURCE_DATE_EPOCH=1492279832
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
 %configure --disable-static --disable-gterminal \
 --disable-migration \
 --without-nautilus-extension
@@ -88,7 +92,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492030700
+export SOURCE_DATE_EPOCH=1492279832
 rm -rf %{buildroot}
 %make_install
 %find_lang gnome-terminal
