@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.24.1
-Release  : 5
+Release  : 6
 URL      : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.24/gnome-terminal-3.24.1.tar.xz
 Summary  : No detailed summary available
@@ -14,6 +14,7 @@ Requires: gnome-terminal-bin
 Requires: gnome-terminal-config
 Requires: gnome-terminal-lib
 Requires: gnome-terminal-data
+Requires: gnome-terminal-doc
 Requires: gnome-terminal-locales
 BuildRequires : dconf-dev
 BuildRequires : desktop-file-utils
@@ -59,6 +60,14 @@ Group: Data
 data components for the gnome-terminal package.
 
 
+%package doc
+Summary: doc components for the gnome-terminal package.
+Group: Documentation
+
+%description doc
+doc components for the gnome-terminal package.
+
+
 %package lib
 Summary: lib components for the gnome-terminal package.
 Group: Libraries
@@ -81,8 +90,11 @@ locales components for the gnome-terminal package.
 %setup -q -n gnome-terminal-3.24.1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1492279999
+export SOURCE_DATE_EPOCH=1492711333
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -98,11 +110,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492279999
+export SOURCE_DATE_EPOCH=1492711333
 rm -rf %{buildroot}
 %make_install
 %find_lang gnome-terminal
@@ -125,6 +137,11 @@ rm -rf %{buildroot}
 /usr/share/dbus-1/services/org.gnome.Terminal.service
 /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.xml
 /usr/share/gnome-shell/search-providers/gnome-terminal-search-provider.ini
+/usr/share/metainfo/org.gnome.Terminal.Nautilus.metainfo.xml
+/usr/share/metainfo/org.gnome.Terminal.appdata.xml
+
+%files doc
+%defattr(-,root,root,-)
 /usr/share/help/C/gnome-terminal/adv-keyboard-shortcuts.page
 /usr/share/help/C/gnome-terminal/app-colors.page
 /usr/share/help/C/gnome-terminal/app-cursor.page
@@ -575,8 +592,6 @@ rm -rf %{buildroot}
 /usr/share/help/sv/gnome-terminal/txt-links.page
 /usr/share/help/sv/gnome-terminal/txt-search.page
 /usr/share/help/sv/gnome-terminal/txt-select-text.page
-/usr/share/metainfo/org.gnome.Terminal.Nautilus.metainfo.xml
-/usr/share/metainfo/org.gnome.Terminal.appdata.xml
 
 %files lib
 %defattr(-,root,root,-)
