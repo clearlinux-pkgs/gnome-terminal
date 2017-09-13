@@ -1,0 +1,4 @@
+Configure miss: whether gterminal is requested
+Configure miss: whether to build the GConf to GSettings migrator
+Configure miss: whether building a distro package
+Configure miss: whether to enable special debug support
