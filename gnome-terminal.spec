@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.26.2
-Release  : 13
+Release  : 14
 URL      : https://download.gnome.org/sources/gnome-terminal/3.26/gnome-terminal-3.26.2.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.26/gnome-terminal-3.26.2.tar.xz
 Summary  : No detailed summary available
