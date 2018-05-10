@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.28.1
-Release  : 18
+Release  : 19
 URL      : https://download.gnome.org/sources/gnome-terminal/3.28/gnome-terminal-3.28.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.28/gnome-terminal-3.28.1.tar.xz
 Summary  : No detailed summary available
