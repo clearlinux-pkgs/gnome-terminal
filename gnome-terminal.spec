@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.30.0
-Release  : 21
+Release  : 22
 URL      : https://download.gnome.org/sources/gnome-terminal/3.30/gnome-terminal-3.30.0.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.30/gnome-terminal-3.30.0.tar.xz
 Summary  : No detailed summary available
