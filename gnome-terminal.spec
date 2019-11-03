@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.34.2
-Release  : 35
+Release  : 36
 URL      : https://download.gnome.org/sources/gnome-terminal/3.34/gnome-terminal-3.34.2.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.34/gnome-terminal-3.34.2.tar.xz
 Summary  : The GNOME Terminal Emulator
