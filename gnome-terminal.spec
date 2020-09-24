@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.38.0
-Release  : 39
+Release  : 40
 URL      : https://download.gnome.org/sources/gnome-terminal/3.38/gnome-terminal-3.38.0.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.38/gnome-terminal-3.38.0.tar.xz
 Summary  : No detailed summary available
