@@ -1,2 +1,5 @@
-3.40.3
+3.42.0
 docbook-xml
+nautilus-dev
+pkgconfig(libnautilus-extension)
+pkgconfig(libpcre2-8)
