@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.44.1
-Release  : 53
+Release  : 54
 URL      : https://download.gnome.org/sources/gnome-terminal/3.44/gnome-terminal-3.44.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.44/gnome-terminal-3.44.1.tar.xz
 Summary  : No detailed summary available
