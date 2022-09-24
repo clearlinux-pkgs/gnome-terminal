@@ -4,7 +4,7 @@
 #
 Name     : gnome-terminal
 Version  : 3.44.1
-Release  : 54
+Release  : 55
 URL      : https://download.gnome.org/sources/gnome-terminal/3.44/gnome-terminal-3.44.1.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-terminal/3.44/gnome-terminal-3.44.1.tar.xz
 Summary  : No detailed summary available
@@ -12,7 +12,6 @@ Group    : Development/Tools
 License  : GFDL-1.3 GPL-3.0
 Requires: gnome-terminal-bin = %{version}-%{release}
 Requires: gnome-terminal-data = %{version}-%{release}
-Requires: gnome-terminal-lib = %{version}-%{release}
 Requires: gnome-terminal-libexec = %{version}-%{release}
 Requires: gnome-terminal-license = %{version}-%{release}
 Requires: gnome-terminal-locales = %{version}-%{release}
@@ -28,10 +27,7 @@ BuildRequires : gnome-terminal-doc
 BuildRequires : gsettings-desktop-schemas-dev
 BuildRequires : itstool
 BuildRequires : libxml2-dev
-BuildRequires : nautilus-dev
 BuildRequires : pkgconfig(gsettings-desktop-schemas)
-BuildRequires : pkgconfig(libnautilus-extension)
-BuildRequires : pkgconfig(libpcre2-8)
 BuildRequires : pkgconfig(uuid)
 BuildRequires : vte-dev
 
@@ -72,17 +68,6 @@ Requires: gnome-terminal-man = %{version}-%{release}
 
 %description doc
 doc components for the gnome-terminal package.
-
-
-%package lib
-Summary: lib components for the gnome-terminal package.
-Group: Libraries
-Requires: gnome-terminal-data = %{version}-%{release}
-Requires: gnome-terminal-libexec = %{version}-%{release}
-Requires: gnome-terminal-license = %{version}-%{release}
-
-%description lib
-lib components for the gnome-terminal package.
 
 
 %package libexec
@@ -135,7 +120,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653929061
+export SOURCE_DATE_EPOCH=1664028872
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -144,13 +129,13 @@ export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=a
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
 export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
 export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dnautilus_extension=false  builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/gnome-terminal
-cp %{_builddir}/gnome-terminal-3.44.1/COPYING %{buildroot}/usr/share/package-licenses/gnome-terminal/842745cb706f8f2126506f544492f7a80dbe29b3
-cp %{_builddir}/gnome-terminal-3.44.1/COPYING.GFDL %{buildroot}/usr/share/package-licenses/gnome-terminal/715f995f11805ee85601834220c43b082f457ea3
+cp %{_builddir}/gnome-terminal-%{version}/COPYING %{buildroot}/usr/share/package-licenses/gnome-terminal/842745cb706f8f2126506f544492f7a80dbe29b3 || :
+cp %{_builddir}/gnome-terminal-%{version}/COPYING.GFDL %{buildroot}/usr/share/package-licenses/gnome-terminal/715f995f11805ee85601834220c43b082f457ea3 || :
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gnome-terminal
 
@@ -855,10 +840,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/help/uk/gnome-terminal/txt-links.page
 /usr/share/help/uk/gnome-terminal/txt-search.page
 /usr/share/help/uk/gnome-terminal/txt-select-text.page
-
-%files lib
-%defattr(-,root,root,-)
-/usr/lib64/nautilus/extensions-3.0/libterminal-nautilus.so
 
 %files libexec
 %defattr(-,root,root,-)
