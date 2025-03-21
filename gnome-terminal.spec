@@ -6,15 +6,16 @@
 # autospec commit: fbbd4e3
 #
 Name     : gnome-terminal
-Version  : 3.54.4
-Release  : 59
-URL      : https://download.gnome.org/sources/gnome-terminal/3.54/gnome-terminal-3.54.4.tar.xz
-Source0  : https://download.gnome.org/sources/gnome-terminal/3.54/gnome-terminal-3.54.4.tar.xz
+Version  : 3.56.0
+Release  : 60
+URL      : https://download.gnome.org/sources/gnome-terminal/3.56/gnome-terminal-3.56.0.tar.xz
+Source0  : https://download.gnome.org/sources/gnome-terminal/3.56/gnome-terminal-3.56.0.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : CC-BY-4.0 GFDL-1.3 GPL-3.0 LGPL-3.0 MIT
 Requires: gnome-terminal-bin = %{version}-%{release}
 Requires: gnome-terminal-data = %{version}-%{release}
+Requires: gnome-terminal-lib = %{version}-%{release}
 Requires: gnome-terminal-libexec = %{version}-%{release}
 Requires: gnome-terminal-license = %{version}-%{release}
 Requires: gnome-terminal-locales = %{version}-%{release}
@@ -27,12 +28,17 @@ BuildRequires : desktop-file-utils
 BuildRequires : docbook-xml
 BuildRequires : gnome-shell
 BuildRequires : gnome-terminal-doc
+BuildRequires : gnutls-dev
 BuildRequires : gsettings-desktop-schemas-dev
 BuildRequires : itstool
 BuildRequires : libxml2-dev
+BuildRequires : pkgconfig(fast_float)
+BuildRequires : pkgconfig(gnutls)
 BuildRequires : pkgconfig(gsettings-desktop-schemas)
 BuildRequires : pkgconfig(libhandy-1)
+BuildRequires : pkgconfig(liblz4)
 BuildRequires : pkgconfig(uuid)
+BuildRequires : pkgconfig(vte-2.91)
 BuildRequires : vte-dev
 # Suppress stripping binaries
 %define __strip /bin/true
@@ -65,6 +71,19 @@ Group: Data
 data components for the gnome-terminal package.
 
 
+%package dev
+Summary: dev components for the gnome-terminal package.
+Group: Development
+Requires: gnome-terminal-lib = %{version}-%{release}
+Requires: gnome-terminal-bin = %{version}-%{release}
+Requires: gnome-terminal-data = %{version}-%{release}
+Provides: gnome-terminal-devel = %{version}-%{release}
+Requires: gnome-terminal = %{version}-%{release}
+
+%description dev
+dev components for the gnome-terminal package.
+
+
 %package doc
 Summary: doc components for the gnome-terminal package.
 Group: Documentation
@@ -72,6 +91,17 @@ Requires: gnome-terminal-man = %{version}-%{release}
 
 %description doc
 doc components for the gnome-terminal package.
+
+
+%package lib
+Summary: lib components for the gnome-terminal package.
+Group: Libraries
+Requires: gnome-terminal-data = %{version}-%{release}
+Requires: gnome-terminal-libexec = %{version}-%{release}
+Requires: gnome-terminal-license = %{version}-%{release}
+
+%description lib
+lib components for the gnome-terminal package.
 
 
 %package libexec
@@ -117,10 +147,10 @@ services components for the gnome-terminal package.
 
 
 %prep
-%setup -q -n gnome-terminal-3.54.4
-cd %{_builddir}/gnome-terminal-3.54.4
+%setup -q -n gnome-terminal-3.56.0
+cd %{_builddir}/gnome-terminal-3.56.0
 pushd ..
-cp -a gnome-terminal-3.54.4 buildavx2
+cp -a gnome-terminal-3.56.0 buildavx2
 popd
 
 %build
@@ -128,7 +158,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1741308774
+export SOURCE_DATE_EPOCH=1742596312
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -178,6 +208,7 @@ DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
 GOAMD64=v2
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gnome-terminal
+%find_lang vte-2.91
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
@@ -193,6 +224,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %defattr(-,root,root,-)
 /usr/share/applications/org.gnome.Terminal.Preferences.desktop
 /usr/share/applications/org.gnome.Terminal.desktop
+/usr/share/applications/org.gnome.Vte.App.Gtk3.desktop
 /usr/share/dbus-1/services/org.gnome.Terminal.service
 /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.xml
 /usr/share/gnome-shell/search-providers/gnome-terminal-search-provider.ini
@@ -203,6 +235,24 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/metainfo/org.gnome.Terminal.Nautilus.metainfo.xml
 /usr/share/metainfo/org.gnome.Terminal.metainfo.xml
 /usr/share/xdg-terminals/org.gnome.Terminal.desktop
+/usr/share/xdg-terminals/org.gnome.Vte.App.Gtk3.desktop
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/vte-2.91/vte/vte.h
+/usr/include/vte-2.91/vte/vtedeprecated.h
+/usr/include/vte-2.91/vte/vteenums.h
+/usr/include/vte-2.91/vte/vteglobals.h
+/usr/include/vte-2.91/vte/vtemacros.h
+/usr/include/vte-2.91/vte/vtepty.h
+/usr/include/vte-2.91/vte/vteregex.h
+/usr/include/vte-2.91/vte/vteterminal.h
+/usr/include/vte-2.91/vte/vtetypebuiltins-gtk3.h
+/usr/include/vte-2.91/vte/vtetypebuiltins.h
+/usr/include/vte-2.91/vte/vteuuid.h
+/usr/include/vte-2.91/vte/vteversion.h
+/usr/lib64/libvte-2.91.so
+/usr/lib64/pkgconfig/vte-2.91.pc
 
 %files doc
 %defattr(0644,root,root,0755)
@@ -989,12 +1039,20 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/help/zh_CN/gnome-terminal/txt-search.page
 /usr/share/help/zh_CN/gnome-terminal/txt-select-text.page
 
+%files lib
+%defattr(-,root,root,-)
+/V3/usr/lib64/libvte-2.91.so.0.8000.1
+/usr/lib64/libvte-2.91.so.0
+/usr/lib64/libvte-2.91.so.0.8000.1
+
 %files libexec
 %defattr(-,root,root,-)
 /V3/usr/libexec/gnome-terminal-preferences
 /V3/usr/libexec/gnome-terminal-server
+/V3/usr/libexec/vte-urlencode-cwd
 /usr/libexec/gnome-terminal-preferences
 /usr/libexec/gnome-terminal-server
+/usr/libexec/vte-urlencode-cwd
 
 %files license
 %defattr(0644,root,root,0755)
@@ -1012,7 +1070,8 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files services
 %defattr(-,root,root,-)
 /usr/lib/systemd/user/gnome-terminal-server.service
+/usr/lib/systemd/user/vte-spawn-.scope.d/defaults.conf
 
-%files locales -f gnome-terminal.lang
+%files locales -f gnome-terminal.lang -f vte-2.91.lang
 %defattr(-,root,root,-)
 
