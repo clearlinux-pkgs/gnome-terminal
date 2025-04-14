@@ -1,8 +1,3 @@
-3.56.0
+3.56.1
 docbook-xml
-gnutls-dev
-pkgconfig(fast_float)
-pkgconfig(gnutls)
 pkgconfig(libhandy-1)
-pkgconfig(liblz4)
-pkgconfig(vte-2.91)
